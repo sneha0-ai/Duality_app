@@ -1,0 +1,86 @@
+🦾 Safety Equipment Detection using YOLOv8
+
+A GenIgnite Hackathon 2025 Project
+
+🚀 Overview
+
+This project aims to detect safety equipment (e.g., Fire Alarm, Oxygen Tank, First Aid Box) using YOLOv8 for real-time detection.
+The model is trained on a custom dataset in Google Colab with T4 GPU and later integrated into an interactive app.
+
+🧰 Tech Stack
+
+Python 3.12
+
+Ultralytics YOLOv8
+
+PyTorch (CUDA enabled)
+
+Google Colab (Tesla T4 GPU)
+
+Streamlit (for app UI)
+
+OpenCV, Pillow
+
+📂 Folder Structure
+datasets/
+ ├── train/
+ │   ├── images/
+ │   └── labels/
+ ├── val/
+ │   ├── images/
+ │   └── labels/
+ └── yolo_params.yaml
+
+⚡ Training YOLOv8 on Google Colab
+1. Clone & Install Dependencies
+!pip install ultralytics
+from google.colab import drive
+drive.mount('/content/drive')
+
+2. Verify GPU
+!nvidia-smi
+
+3. Start Training
+!yolo detect train model=yolov8s.pt data="/content/drive/MyDrive/datasets/yolo_params.yaml" epochs=100 imgsz=640 batch=16 device=0
+
+🧪 Validation and mAP Check
+!yolo val model="/content/drive/MyDrive/datasets/runs/detect/train/weights/best.pt" data="/content/drive/MyDrive/datasets/yolo_params.yaml"
+
+
+✅ Example Metrics:
+
+Precision: 0.908
+
+Recall: 0.658
+
+mAP@0.5: 0.745
+
+mAP@0.5-0.95: 0.602
+
+🧠 Run Detection
+!yolo predict model="/content/drive/MyDrive/datasets/runs/detect/train/weights/best.pt" source="/content/test_image.jpg" save=True
+
+🖼️ Streamlit App (Optional UI)
+!pip install streamlit
+!streamlit run app.py
+
+
+👉 Use ngrok if you want to view the app in Colab.
+
+🔮 Future Improvements
+
+Hyperparameter tuning
+
+Real-time video detection
+
+Lighter model for mobile/edge
+
+More dataset augmentation
+
+👨‍💻 Team Codex
+
+Sneha | Trijya | Saumya
+
+Hackathon: GenIgnite 2025
+
+Date: 19 Oct 2025
